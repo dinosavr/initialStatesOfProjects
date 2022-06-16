@@ -2,7 +2,7 @@
   "name": "react-init",
   "version": "1.0.0",
   "description": "The base of a react app",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "dev": "webpack --mode development",
     "watch": "webpack --watch",
@@ -20,8 +20,10 @@
   "devDependencies": {
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
+    "core-js": "^3.23.1",
     "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
     "html-loader": "^3.1.2",
@@ -33,5 +35,8 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }
