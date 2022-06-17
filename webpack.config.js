@@ -2,12 +2,20 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+// Main const
+const PATHS = {
+  src: path.join(__dirname, './src'),
+  dist: path.join(__dirname, './dist'),
+  assets: 'assets/',
+};
 
 module.exports = {
   mode: 'development',
   entry: ['./src/index.jsx'],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: PATHS.dist,
     filename: '[name].[fullhash].js',
     clean: true,
   },
@@ -17,7 +25,6 @@ module.exports = {
     static: './dist',
     watchFiles: ['src/*.html'],
     hot: true,
-    liveReload: true,
   },
   plugins: [
     new HtmlWebPackPlugin({
@@ -27,6 +34,28 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].bundle.css',
       chunkFilename: '[id].css',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        // Images:
+        {
+          from: `${PATHS.src}/${PATHS.assets}img`,
+          to: `${PATHS.assets}img`,
+          noErrorOnMissing: true,
+        },
+        // Fonts:
+        {
+          from: `${PATHS.src}/${PATHS.assets}fonts`,
+          to: `${PATHS.assets}fonts`,
+          noErrorOnMissing: true,
+        },
+        // Static (copy to '/'):
+        {
+          from: `${PATHS.src}/static`,
+          to: '',
+          noErrorOnMissing: true,
+        },
+      ],
     }),
   ],
   module: {
@@ -45,7 +74,16 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|ttf|otf|eot)$/,
