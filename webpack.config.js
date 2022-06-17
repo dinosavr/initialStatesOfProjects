@@ -13,7 +13,7 @@ const PATHS = {
 
 module.exports = {
   mode: 'development',
-  entry: ['./src/index.jsx'],
+  entry: ['./src/index.tsx'],
   output: {
     path: PATHS.dist,
     filename: '[name].[fullhash].js',
@@ -23,11 +23,11 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
-    watchFiles: ['src/*.html'],
+    watchFiles: ['src/*.tsx'],
     hot: true,
   },
   plugins: [
-    new HtmlWebPackPlugin({
+      new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html',
     }),
@@ -127,12 +127,17 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader',
+      },
     ],
   },
   optimization: {
     minimizer: [new CssMinimizerPlugin()],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
 };

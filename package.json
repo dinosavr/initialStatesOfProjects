@@ -2,7 +2,7 @@
   "name": "react-init",
   "version": "1.0.0",
   "description": "The base of a react app",
-  "main": "index.jsx",
+  "main": "index.tsx",
   "scripts": {
     "start": "webpack serve --open --mode development",
     "watch": "webpack --watch",
@@ -23,11 +23,13 @@
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
-    "eslint": "^8.17.0",
+    "eslint": "^8.18.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-prettier-react": "0.0.24",
@@ -56,9 +58,15 @@
     "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
+    "@types/jest": "^28.1.2",
+    "@types/node": "^18.0.0",
+    "@types/react": "^18.0.14",
+    "@types/react-dom": "^18.0.5",
     "browserslist": "^4.20.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.7.4"
   },
   "browserslist": {
     "production": [
